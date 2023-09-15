@@ -14,11 +14,11 @@ import {useCalendar} from '../DatePicker';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
-const TimeScroller = ({title, data, onChange, cur}) => {
+const TimeScroller = ({title, data, onChange}) => {
   const {options, utils} = useCalendar();
   const [itemSize, setItemSize] = useState(0);
   const style = styles(options);
-  const scrollAnimatedValue = useRef(new Animated.Value(cur)).current;
+  const scrollAnimatedValue = useRef(new Animated.Value(0)).current;
   const scrollListener = useRef(null);
   const active = useRef(0);
   data = ['', '', ...data, '', ''];
@@ -187,12 +187,10 @@ const SelectTime = () => {
       <TimeScroller
         title={utils.config.hour}
         data={Array.from({length: 24}, (x, i) => i)}
-        cur={10}
         onChange={hour => setTime({...time, hour})}
       />
       <TimeScroller
         title={utils.config.minute}
-        cur={30}
         data={Array.from({length: 60 / minuteInterval}, (x, i) => i * minuteInterval)}
         onChange={minute => setTime({...time, minute})}
       />
